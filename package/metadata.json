@@ -1,0 +1,16 @@
+{
+    "KPlugin": {
+        "Id": "flextile",
+        "Name": "FlexTile",
+        "Description": "Auto-tiling you can switch on and off per desktop (Meta+Y), with the usual tiling shortcuts",
+        "Icon": "view-grid",
+        "Authors": [ { "Name": "zebus3d" } ],
+        "License": "GPL-3.0-or-later",
+        "Version": "0.1.0",
+        "EnabledByDefault": false
+    },
+    "KPackageStructure": "KWin/Script",
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "X-KDE-ConfigModule": "kwin/effects/configs/kcm_kwin4_genericscripted"
+}

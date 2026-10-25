@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FlexTileConfig</class>
+ <widget class="QWidget" name="FlexTileConfig">
+  <layout class="QFormLayout" name="form">
+   <item row="0" column="0" colspan="2">
+    <widget class="QCheckBox" name="kcfg_tileByDefault">
+     <property name="text"><string>Tile new desktops by default (Meta+Y still switches it per desktop)</string></property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="labelInner"><property name="text"><string>Gap between windows:</string></property></widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QSpinBox" name="kcfg_gapInner">
+     <property name="suffix"><string> px</string></property>
+     <property name="maximum"><number>64</number></property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="labelOuter"><property name="text"><string>Gap to screen edges:</string></property></widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QSpinBox" name="kcfg_gapOuter">
+     <property name="suffix"><string> px</string></property>
+     <property name="maximum"><number>64</number></property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QCheckBox" name="kcfg_createDesktops">
+     <property name="text"><string>Meta+1…9 creates the desktop if it does not exist yet</string></property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="labelFloat"><property name="text"><string>Always float (window classes):</string></property></widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLineEdit" name="kcfg_floatClasses">
+     <property name="toolTip"><string>Comma separated. Find a window's class with Alt+F3 → More Actions → Configure Special Window Settings → Detect.</string></property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
