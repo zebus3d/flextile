@@ -458,7 +458,7 @@ function shortcut(id, text, keys, fn) {
 
 loadConfig();
 
-shortcut("Toggle Tiling", "Toggle tiling on this desktop", "Meta+Y", toggleTiling);
+shortcut("Toggle Tiling", "Toggle tiling on this desktop", "Meta+F", toggleTiling);
 shortcut("Toggle Floating", "Float or tile the active window", "Meta+G", toggleFloat);
 shortcut("Toggle Orientation", "Flip split orientation", "Meta+O", toggleOrientation);
 shortcut("Toggle Maximize", "Maximize or restore the active window", "Meta+M", toggleMaximize);

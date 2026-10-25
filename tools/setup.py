@@ -36,7 +36,7 @@ SPECIAL = {"Left": 0x01000012, "Up": 0x01000013, "Right": 0x01000014,
 
 # Keep in sync with the defaults in package/contents/code/main.js.
 BINDINGS = {
-    "Toggle Tiling": ["Meta+Y"],
+    "Toggle Tiling": ["Meta+F"],
     "Toggle Floating": ["Meta+G"],
     "Toggle Orientation": ["Meta+O"],
     "Toggle Maximize": ["Meta+M"],
@@ -289,7 +289,7 @@ def install(args):
              "--key", "FreeFloating", "true"])
         save_backup(backup)
 
-    print("\nDone. Meta+Y turns tiling on and off on the current desktop.")
+    print("\nDone. Meta+F turns tiling on and off on the current desktop.")
     print("Your previous shortcuts are saved in %s; ./uninstall.sh puts them back." % BACKUP)
 
 

@@ -2,7 +2,7 @@
     "KPlugin": {
         "Id": "flextile",
         "Name": "FlexTile",
-        "Description": "Auto-tiling you can switch on and off per desktop (Meta+Y), with the usual tiling shortcuts",
+        "Description": "Auto-tiling you can switch on and off per desktop (Meta+F), with the usual tiling shortcuts",
         "Icon": "view-grid",
         "Authors": [ { "Name": "zebus3d" } ],
         "License": "GPL-3.0-or-later",

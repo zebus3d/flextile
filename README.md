@@ -2,7 +2,7 @@
 
 Mosaico automático para **KDE Plasma 6** que se activa y se desactiva con una tecla, como en COSMIC (Pop!_OS). Usa los atajos habituales de Hyprland, i3 y COSMIC, y sigue dejando hacer lo que Hyprland no deja hacer bien: **minimizar ventanas**.
 
-- **`Meta+Y` activa o desactiva el mosaico** en el escritorio actual. Con el mosaico apagado, Plasma funciona como siempre.
+- **`Meta+F` activa o desactiva el mosaico** en el escritorio actual. Con el mosaico apagado, Plasma funciona como siempre.
 - **Minimizar funciona:** la ventana minimizada sale del mosaico, las demás ocupan su hueco y, al restaurarla, vuelve a entrar.
 - **Ventanas flotantes:** con `Meta+G` sacas una ventana concreta del mosaico.
 - **Lanzador estilo Spotlight:** `Meta+Espacio` abre aplicaciones, busca archivos y hace cálculos.
@@ -43,10 +43,10 @@ Mosaico automático para **KDE Plasma 6** que se activa y se desactiva con una t
      Meta+Left → released from "Situar la ventana en mosaico a la izquierda"
      …
    Starting FlexTile…
-   Done. Meta+Y turns tiling on and off on the current desktop.
+   Done. Meta+F turns tiling on and off on the current desktop.
    ```
 
-Al instalar no se mueve ninguna ventana: el mosaico viene **apagado** en todos los escritorios hasta que pulses `Meta+Y`.
+Al instalar no se mueve ninguna ventana: el mosaico viene **apagado** en todos los escritorios hasta que pulses `Meta+F`.
 
 ### Qué cambia en tus atajos
 
@@ -81,16 +81,16 @@ Para probarlo sin desordenar el escritorio donde estás trabajando:
 
 1. Pulsa **`Meta+2`** para ir al escritorio 2. Si no existe, se crea.
 2. Abre allí dos o tres ventanas, por ejemplo Dolphin, Konsole y el navegador.
-3. Pulsa **`Meta+Y`**. Las ventanas se colocan solas en mosaico y verás el aviso *Tiling on*.
+3. Pulsa **`Meta+F`**. Las ventanas se colocan solas en mosaico y verás el aviso *Tiling on*.
 4. Abre otra ventana: parte en dos la ventana activa, por su lado más largo.
 5. Pulsa **`Meta+H`** para minimizar la ventana activa. Las demás ocupan su hueco. Restáurala desde la barra de tareas y volverá a su sitio en el mosaico.
 6. Muévete entre ventanas con **`Meta+flechas`** y cámbialas de sitio con **`Meta+Shift+flechas`**.
-7. Pulsa **`Meta+Y`** otra vez para apagar el mosaico. Cada ventana vuelve a la posición y el tamaño que tenía antes.
+7. Pulsa **`Meta+F`** otra vez para apagar el mosaico. Cada ventana vuelve a la posición y el tamaño que tenía antes.
 8. Pulsa **`Meta+1`** para volver a tu escritorio de siempre.
 
 ### El mosaico va por escritorio
 
-Cada escritorio virtual, y en cada pantalla si tienes varias, tiene su propio interruptor. Puedes tener el escritorio 1 normal, con ventanas flotantes, y el 2 en mosaico. `Meta+Y` solo afecta al escritorio y la pantalla en los que estás.
+Cada escritorio virtual, y en cada pantalla si tienes varias, tiene su propio interruptor. Puedes tener el escritorio 1 normal, con ventanas flotantes, y el 2 en mosaico. `Meta+F` solo afecta al escritorio y la pantalla en los que estás.
 
 ### Ventanas flotantes dentro del mosaico
 
@@ -120,7 +120,7 @@ Abre KRunner en el centro de la pantalla. Escribe:
 
 | Atajo | Qué hace |
 |---|---|
-| `Meta+Y` | Activar o desactivar el mosaico en este escritorio |
+| `Meta+F` | Activar o desactivar el mosaico en este escritorio |
 | `Meta+G` | Hacer flotante la ventana activa o devolverla al mosaico |
 | `Meta+←↑→↓` | Mover el foco a la ventana de ese lado |
 | `Meta+Shift+←↑→↓` | Con mosaico: intercambiar la ventana con la de ese lado, o pasarla a la otra pantalla si no hay ninguna. Sin mosaico: pegarla a esa mitad de la pantalla, como en Plasma |
