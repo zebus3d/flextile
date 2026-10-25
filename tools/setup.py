@@ -186,9 +186,9 @@ def save_backup(b):
     BACKUP.write_text(json.dumps(b, indent=2, ensure_ascii=False))
 
 
-def free_key(code, backup):
+def free_key(code, backup, keep=None):
     for action_id in holders(code):
-        if action_id[1].startswith("FlexTile: "):
+        if action_id[1].startswith("FlexTile: ") or action_id[:2] == (keep or [])[:2]:
             continue
         tag = action_id[0] + "|" + action_id[1]
         current = get_keys(action_id)
@@ -276,7 +276,7 @@ def install(args):
     if not args.no_launcher:
         print("Meta+Space → KRunner, centred like Spotlight…")
         code = key_code(KRUNNER_KEY)
-        free_key(code, backup)
+        free_key(code, backup, keep=KRUNNER)
         keys = get_keys(KRUNNER)
         backup["shortcuts"].setdefault("krunner|_launch", {"id": KRUNNER, "keys": keys})
         save_backup(backup)

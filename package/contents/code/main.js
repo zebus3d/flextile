@@ -129,7 +129,9 @@ function applyTree(tree) {
     try {
         for (const l of leaves(tree.root)) {
             const w = l.w;
-            if (w.fullScreen || w.maximizeMode === 3) continue;   // keeps its slot
+            if (w.fullScreen) continue;   // keeps its slot until it leaves fullscreen
+            // Like Hyprland: any change in the layout shares the screen again,
+            // so a maximized window does not hide the ones that just joined.
             if (w.maximizeMode !== 0) w.setMaximize(false, false);
             w.frameGeometry = rect(l.rect.x, l.rect.y, l.rect.width, l.rect.height);
         }
@@ -178,10 +180,31 @@ function restoreFloating(w) {
     w.frameGeometry = rect(x, y, width, height);
 }
 
+// A new window splits the window that had the focus before it, like Hyprland.
+// By the time it is added it usually is the active one, hence the history.
+const focusHistory = [];   // window ids, most recent last
+
+function onActivated(w) {
+    if (!w) return;
+    const id = wid(w), i = focusHistory.indexOf(id);
+    if (i >= 0) focusHistory.splice(i, 1);
+    focusHistory.push(id);
+    if (focusHistory.length > 50) focusHistory.shift();
+}
+
+function lastFocusedLeaf(tree, except) {
+    const ls = leaves(tree.root);
+    for (let i = focusHistory.length - 1; i >= 0; i--) {
+        if (focusHistory[i] === wid(except)) continue;
+        const l = ls.find(x => wid(x.w) === focusHistory[i]);
+        if (l) return l;
+    }
+    return null;
+}
+
 // Bring every tree in line with the current window states, then lay out.
 function sync() {
     const dirty = {};
-    const active = workspace.activeWindow;
 
     // 1. Drop leaves whose window left the tree (closed, minimized, moved...).
     for (const key in trees) {
@@ -207,9 +230,7 @@ function sync() {
             savedGeom[wid(w)] = { x: g.x, y: g.y, width: g.width, height: g.height };
         }
         if (tree.root) computeRects(tree.root, tileArea(tree));
-        let target = null;
-        if (active && active !== w) target = findLeaf(tree, active);
-        insertWindow(tree, w, target);
+        insertWindow(tree, w, lastFocusedLeaf(tree, w));
         dirty[treeKey(tree.desktop, tree.output)] = tree;
     }
 
@@ -276,7 +297,13 @@ function hook(w) {
     w.desktopsChanged.connect(sync);
     w.outputChanged.connect(sync);
     w.fullScreenChanged.connect(sync);
-    w.maximizedChanged.connect(() => { if (!applying) sync(); relayoutAll(); });
+    // Meta+M keeps a tiled window maximized until the layout changes; when it
+    // is restored, put it back in its tile.
+    w.maximizedChanged.connect(() => {
+        if (applying || w.maximizeMode !== 0) return;
+        const t = leafOf(w);
+        if (t && t.leaf) applyTree(t.tree);
+    });
     w.interactiveMoveResizeFinished.connect(() => onMoveResizeFinished(w));
 }
 
@@ -447,8 +474,14 @@ for (let n = 1; n <= 9; n++) {
     shortcut("Window to Desktop " + n, "Move window to desktop " + n, "Meta+Shift+" + n, () => sendToDesktop(n));
 }
 
+workspace.windowActivated.connect(onActivated);
 workspace.windowAdded.connect(w => { hook(w); sync(); });
-workspace.windowRemoved.connect(w => { delete hooked[wid(w)]; delete pendingRestore[wid(w)]; delete userFloat[wid(w)]; delete savedGeom[wid(w)]; sync(); });
+workspace.windowRemoved.connect(w => {
+    const i = focusHistory.indexOf(wid(w));
+    if (i >= 0) focusHistory.splice(i, 1);
+    for (const map of [hooked, pendingRestore, userFloat, savedGeom]) delete map[wid(w)];
+    sync();
+});
 workspace.screensChanged.connect(() => { sync(); relayoutAll(); });
 workspace.virtualScreenGeometryChanged.connect(relayoutAll);
 workspace.desktopsChanged.connect(sync);
